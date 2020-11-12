@@ -22,8 +22,6 @@ import com.Ampara.LifeMatch.repository.PostagemRepository;
 @RequestMapping ("/postagem")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostagemController {
-	
-	
 	@Autowired
 	private PostagemRepository repository;
 	
@@ -32,10 +30,16 @@ public class PostagemController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
-	//MÉTODO GET PUXANDO A POSTAGEM POR ID
 	@GetMapping("/{id}")
 	public ResponseEntity<PostagemModel>getById(@PathVariable Long id){
 		return repository.findById(id)
+				.map(resp-> ResponseEntity.ok(resp))
+						.orElse(ResponseEntity.notFound().build());
+	}
+	
+	@GetMapping("/{titulo}")
+	public ResponseEntity<PostagemModel>getByCategoriaAjuda(@PathVariable String titulo){
+		return repository.findByTitulo(titulo)
 				.map(resp-> ResponseEntity.ok(resp))
 						.orElse(ResponseEntity.notFound().build());
 	}

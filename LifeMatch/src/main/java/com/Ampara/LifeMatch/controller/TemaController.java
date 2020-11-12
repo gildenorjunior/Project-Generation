@@ -37,12 +37,14 @@ public class TemaController {
 						.orElse(ResponseEntity.notFound().build());
 	}
 	
-//	@GetMapping("/{categoriaAjuda}")
-//	public ResponseEntity<TemaModel>getByCategoriaAjuda(@PathVariable Long categoriaAjuda){
-//		return repository.findById(categoriaAjuda)
-//				.map(resp-> ResponseEntity.ok(resp))
-//						.orElse(ResponseEntity.notFound().build());
-//	}
+	@GetMapping("/{categoriaAjuda}")
+	public ResponseEntity<TemaModel>getByCategoriaAjuda(@PathVariable String categoriaAjuda){
+		return repository.findByCategoriaAjuda(categoriaAjuda)
+				.map(resp-> ResponseEntity.ok(resp))
+						.orElse(ResponseEntity.notFound().build());
+	}
+	
+	
 	
 	@PostMapping
 	public ResponseEntity<TemaModel>post (@RequestBody TemaModel tema){

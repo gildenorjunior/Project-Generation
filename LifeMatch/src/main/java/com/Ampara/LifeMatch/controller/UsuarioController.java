@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Ampara.LifeMatch.model.PostagemModel;
 import com.Ampara.LifeMatch.model.UsuarioModel;
 import com.Ampara.LifeMatch.repository.UsuarioRepository;
 
@@ -33,6 +34,13 @@ public class UsuarioController {
 	@GetMapping("/{id}")
 	public ResponseEntity<UsuarioModel>getById(@PathVariable Long id){
 		return repository.findById(id)
+				.map(resp-> ResponseEntity.ok(resp))
+						.orElse(ResponseEntity.notFound().build());
+	}
+	
+	@GetMapping("/{loginUsuario}")
+	public ResponseEntity<UsuarioModel>getByCategoriaAjuda(@PathVariable String loginUsuario){
+		return repository.findByLoginUsuario(loginUsuario)
 				.map(resp-> ResponseEntity.ok(resp))
 						.orElse(ResponseEntity.notFound().build());
 	}

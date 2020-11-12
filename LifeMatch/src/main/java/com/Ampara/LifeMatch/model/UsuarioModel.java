@@ -1,15 +1,20 @@
 package com.Ampara.LifeMatch.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.UniqueElements;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -17,12 +22,12 @@ import com.sun.istack.NotNull;
 public class UsuarioModel {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long id_usuario;
+	private Long idUsuario;
 	
 	@Column
 	@NotNull
 	@Size (min = 10,max = 50)
-	private String nome_completo;
+	private String nomeCompleto;
 	
 	@Column
 	@NotNull
@@ -32,7 +37,7 @@ public class UsuarioModel {
 	
 	@Column
 	@NotNull
-	private boolean categoria_usuario;
+	private String categoriaUsuario;
 	
 	@Column
 	@NotNull
@@ -41,22 +46,31 @@ public class UsuarioModel {
 
 	@Column
 	@NotNull
-	private String imagem_usuario;
+	private String imagensUsuario;
+	
+	@Column
+	@NotNull
+	private String loginUsuario;
+	
+	@OneToMany (mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties ("usuario")
+	
+	private  List<PostagemModel> postagem;
 
-	public Long getId_usuario() {
-		return id_usuario;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setId_usuario(Long id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
-	public String getNome_completo() {
-		return nome_completo;
+	public String getNomeCompleto() {
+		return nomeCompleto;
 	}
 
-	public void setNome_completo(String nome_completo) {
-		this.nome_completo = nome_completo;
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
 	}
 
 	public String getSenha() {
@@ -67,6 +81,13 @@ public class UsuarioModel {
 		this.senha = senha;
 	}
 
+	public String getCategoriaUsuario() {
+		return categoriaUsuario;
+	}
+
+	public void setCategoriaUsuario(String categoriaUsuario) {
+		this.categoriaUsuario = categoriaUsuario;
+	}
 
 	public String getEmail() {
 		return email;
@@ -76,13 +97,29 @@ public class UsuarioModel {
 		this.email = email;
 	}
 
-	public String getImagem_usuario() {
-		return imagem_usuario;
+	public String getImagensUsuario() {
+		return imagensUsuario;
 	}
 
-	public void setImagem_usuario(String imagem_usuario) {
-		this.imagem_usuario = imagem_usuario;
+	public void setImagensUsuario(String imagensUsuario) {
+		this.imagensUsuario = imagensUsuario;
 	}
+
+	public List<PostagemModel> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<PostagemModel> postagem) {
+		this.postagem = postagem;
+	}
+
+	public String getLoginUsuario() {
+		return loginUsuario;
+	}
+
+	public void setLoginUsuario(String loginUsuario) {
+		this.loginUsuario = loginUsuario;
+	}
+
 	
-		
 }
