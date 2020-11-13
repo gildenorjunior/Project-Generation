@@ -7,32 +7,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
-import com.Ampara.LifeMatch.Enums.Identificacao;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.istack.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 
 @Entity
 @Table (name = "tb_postagem")
 public class PostagemModel {
 	
-	
+	//ATRIBUTOS
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long id_postagem;
+	private Long idPostagem;
+	
+	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private Date dataPostagem = new java.sql.Date(System.currentTimeMillis());
+	
+	//Verificar se a data de conclusão será atribuida automaticamente ou não.
+	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private Date dataConclusao = new java.sql.Date(System.currentTimeMillis());
 	
 	@Column
 	@NotNull
-	@JsonFormat(pattern="yyyy-mm-dd")
-	private Date data_conclusao;
-	
-	@Column
-	@NotNull
-	@JsonFormat(pattern="yyyy-mm-dd")
-	private Date data_postagem;
+	@Size (min = 4 ,max = 100)
+	private String titulo;
 	
 	@Column
 	@NotNull
@@ -41,36 +50,55 @@ public class PostagemModel {
 	
 	@Column
 	@NotNull
-	private Identificacao identificacao;
+	private String identificacao;
 	
 	@Column
 	@NotNull
-	private String imagens_postagem;
+	private String imagensPostagem;
 	
 	
+	//RELACIONAMENTO COM A TABELA POSTAGEM
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private TemaModel tema;
 	
-	public Long getId_postagem() {
-		return id_postagem;
+//	//RELACIONAMENTO COM A TABELA USUARIO
+//	@ManyToOne
+//	@JsonIgnoreProperties("postagem")
+//	private UsuarioModel usuario;
+
+	
+	//MÉTODOS GETTES AND SETTERS
+	public Long getIdPostagem() {
+		return idPostagem;
 	}
 
-	public void setId_postagem(Long id_postagem) {
-		this.id_postagem = id_postagem;
+	public void setIdPostagem(Long idPostagem) {
+		this.idPostagem = idPostagem;
 	}
 
-	public Date getData_conclusao() {
-		return data_conclusao;
+	public Date getDataPostagem() {
+		return dataPostagem;
 	}
 
-	public void setData_conclusao(Date data_conclusao) {
-		this.data_conclusao = data_conclusao;
+	public void setDataPostagem(Date dataPostagem) {
+		this.dataPostagem = dataPostagem;
 	}
 
-	public Date getData_postagem() {
-		return data_postagem;
+	public Date getDataConclusao() {
+		return dataConclusao;
 	}
 
-	public void setData_postagem(Date data_postagem) {
-		this.data_postagem = data_postagem;
+	public void setDataConclusao(Date dataConclusao) {
+		this.dataConclusao = dataConclusao;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getDescricao() {
@@ -81,15 +109,38 @@ public class PostagemModel {
 		this.descricao = descricao;
 	}
 
-	
-	public String getImagens_postagem() {
-		return imagens_postagem;
+	public String getIdentificacao() {
+		return identificacao;
 	}
 
-	public void setImagens_postagem(String imagens_postagem) {
-		this.imagens_postagem = imagens_postagem;
+	public void setIdentificacao(String identificacao) {
+		this.identificacao = identificacao;
 	}
-	
+
+	public String getImagensPostagem() {
+		return imagensPostagem;
+	}
+
+	public void setImagensPostagem(String imagensPostagem) {
+		this.imagensPostagem = imagensPostagem;
+	}
+
+	public TemaModel getTema() {
+		return tema;
+	}
+
+	public void setTema(TemaModel tema) {
+		this.tema = tema;
+	}
+
+//	public UsuarioModel getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(UsuarioModel usuario) {
+//		this.usuario = usuario;
+//	}
+
 	
 	
 }

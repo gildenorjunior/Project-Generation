@@ -22,38 +22,45 @@ import com.Ampara.LifeMatch.repository.TemaRepository;
 @RequestMapping ("/tema")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
+	
 	@Autowired
 	private TemaRepository repository;
 	
+	//MÉTODO GET QUE BUSCA TODOS OS TEMAS DE POSTAGENS
 	@GetMapping
-	public ResponseEntity<List<TemaModel>>getAll(){
+	public ResponseEntity<List<TemaModel>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
+	//MÉTODO GET QUE BUSCA TEMA DE POSTAGENS PELO ID
 	@GetMapping("/{id}")
-	public ResponseEntity<TemaModel>getById(@PathVariable Long id){
+	public ResponseEntity<TemaModel> getById(@PathVariable Long id){
 		return repository.findById(id)
 				.map(resp-> ResponseEntity.ok(resp))
 						.orElse(ResponseEntity.notFound().build());
 	}
 	
-//	@GetMapping("/{categoriaAjuda}")
-//	public ResponseEntity<TemaModel>getByCategoriaAjuda(@PathVariable Long categoriaAjuda){
-//		return repository.findById(categoriaAjuda)
-//				.map(resp-> ResponseEntity.ok(resp))
-//						.orElse(ResponseEntity.notFound().build());
-//	}
+	//MÉTODO GET QUE BUSCA TEMA PELA CATEGORIA DE AJUDA
+	@GetMapping("/categoriaAjuda/{categoriaAjuda}")
+	public ResponseEntity<TemaModel> getByCategoriaAjuda(@PathVariable String categoriaAjuda){
+		return repository.findByCategoriaAjudaContainingIgnoreCase(categoriaAjuda)
+				.map(resp-> ResponseEntity.ok(resp))
+						.orElse(ResponseEntity.notFound().build());
+	}
 	
+	//MÉTODO POST QUE CRIA UM NOVO TEMA
 	@PostMapping
-	public ResponseEntity<TemaModel>post (@RequestBody TemaModel tema){
+	public ResponseEntity<TemaModel> post(@RequestBody TemaModel tema){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
 	}
 	
+	//MÉTODO PUT QUE ATUALIZA UM TEMA
 	@PutMapping
-	public ResponseEntity<TemaModel>put (@RequestBody TemaModel tema){
+	public ResponseEntity<TemaModel> put(@RequestBody TemaModel tema){
 		return ResponseEntity.ok(repository.save(tema));
 	}
 	
+	//MÉTODO DELETE QUE APAGA UM TEMA PELO ID
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);
