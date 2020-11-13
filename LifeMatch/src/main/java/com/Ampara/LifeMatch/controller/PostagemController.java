@@ -24,6 +24,7 @@ import com.Ampara.LifeMatch.repository.PostagemRepository;
 public class PostagemController {
 	
 	@Autowired
+	//teste
 	private PostagemRepository repository;
 	
 	//MÉTODO GET QUE BUSCA TODAS POSTAGENS
