@@ -30,7 +30,7 @@ public class SwaggerConfig {
 	}
 
 		private Contact contact() {
-		return new Contact("Ampara ","https://github.com/Guilherme-Marcionilo/Project-Generation", "Teste");
+		return new Contact("Projeto Integrador Desenvolvido pelos Desenvolvedores Everton, Guilherme, Gildenor, Sarah e Wellington.","https://github.com/Guilherme-Marcionilo/Project-Generation", "https://github.com/Guilherme-Marcionilo/Project-Generation");
 	}
 	
 		

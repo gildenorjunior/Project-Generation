@@ -14,22 +14,15 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
-
 
 @Entity
 @Table (name = "tb_postagem")
 public class PostagemModel {
 	
-	
+	//ATRIBUTOS
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long idPostagem;
@@ -64,14 +57,18 @@ public class PostagemModel {
 	private String imagensPostagem;
 	
 	
+	//RELACIONAMENTO COM A TABELA POSTAGEM
 	@ManyToOne
-	@JsonIgnoreProperties ("postagem")
+	@JsonIgnoreProperties("postagem")
 	private TemaModel tema;
 	
-	@ManyToOne
-	@JsonIgnoreProperties ("postagem")
-	private UsuarioModel usuario;
+//	//RELACIONAMENTO COM A TABELA USUARIO
+//	@ManyToOne
+//	@JsonIgnoreProperties("postagem")
+//	private UsuarioModel usuario;
 
+	
+	//MÉTODOS GETTES AND SETTERS
 	public Long getIdPostagem() {
 		return idPostagem;
 	}
@@ -136,13 +133,13 @@ public class PostagemModel {
 		this.tema = tema;
 	}
 
-	public UsuarioModel getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(UsuarioModel usuario) {
-		this.usuario = usuario;
-	}
+//	public UsuarioModel getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(UsuarioModel usuario) {
+//		this.usuario = usuario;
+//	}
 
 	
 	

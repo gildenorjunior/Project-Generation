@@ -20,6 +20,8 @@ import com.sun.istack.NotNull;
 @Entity
 @Table (name = "tb_usuario")
 public class UsuarioModel {
+	
+	//ATRIBUTOS 
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long idUsuario;
@@ -52,11 +54,14 @@ public class UsuarioModel {
 	@NotNull
 	private String loginUsuario;
 	
-	@OneToMany (mappedBy = "usuario", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties ("usuario")
 	
-	private  List<PostagemModel> postagem;
+	//RELACIONAMENTO ENTRE A TABELA POSTAGEM
+//	@OneToMany //(mappedBy = "postagem", cascade = CascadeType.ALL)
+//	@JsonIgnoreProperties("usuario")
+//	private  List<PostagemModel> postagem;
 
+	
+	//MÉTODOS GETTERS AND SETTERS
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
@@ -105,13 +110,13 @@ public class UsuarioModel {
 		this.imagensUsuario = imagensUsuario;
 	}
 
-	public List<PostagemModel> getPostagem() {
-		return postagem;
-	}
-
-	public void setPostagem(List<PostagemModel> postagem) {
-		this.postagem = postagem;
-	}
+//	public List<PostagemModel> getPostagem() {
+//		return postagem;
+//	}
+//
+//	public void setPostagem(List<PostagemModel> postagem) {
+//		this.postagem = postagem;
+//	}
 
 	public String getLoginUsuario() {
 		return loginUsuario;
