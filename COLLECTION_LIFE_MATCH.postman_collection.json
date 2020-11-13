@@ -6,6 +6,73 @@
 	},
 	"item": [
 		{
+			"name": "GET_POSTAGEM",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/postagem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postagem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_POSTAGEM_BYID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/postagem/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postagem",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_POSTAGEM_BYTITULO",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/postagem/titulo/Busco",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postagem",
+						"titulo",
+						"Busco"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "POST_POSTAGEM",
 			"request": {
 				"method": "POST",
@@ -33,6 +100,58 @@
 			"response": []
 		},
 		{
+			"name": "PUT_POSTAGEM",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idPostagem\" : \"11\",\r\n    \"titulo\": \"Postagem Alterado\",\r\n    \"descricao\": \"Estou buscando alguém próximo a mim que possa contribuir de forma profissional como Psicologo(a)\",\r\n    \"identificacao\": \"Publico\",\r\n    \"imagensPostagem\": \"urldaimagem\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/postagem/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postagem",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE_POSTAGEM",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/postagem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postagem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET_TEMA",
 			"request": {
 				"method": "GET",
@@ -45,6 +164,46 @@
 					"port": "8080",
 					"path": [
 						"tema"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_TEMA_BYID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/tema/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tema",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_TEMA_BYCATEGORIAAJUDA",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tema/categoriaAjuda/higiene",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tema",
+						"categoriaAjuda",
+						"higiene"
 					]
 				}
 			},
@@ -78,52 +237,20 @@
 			"response": []
 		},
 		{
-			"name": "DELETE_POSTAGEM",
+			"name": "DELETE_TEMA",
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "http://localhost:8080/postagem/1",
+					"raw": "http://localhost:8080/tema/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"postagem",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET_POSTAGEM_BYTITULO",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/postagem/titulo/Busco",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"postagem",
-						"titulo",
-						"Busco"
+						"tema",
+						""
 					]
 				}
 			},
