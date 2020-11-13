@@ -23,38 +23,45 @@ import com.Ampara.LifeMatch.repository.UsuarioRepository;
 @RequestMapping ("/usuario")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
+	
 	@Autowired
 	private UsuarioRepository repository;
 	
+	//MÉTODO GET QUE BUSCA TODOS USUARIOS
 	@GetMapping
-	public ResponseEntity<List<UsuarioModel>>getAll(){
+	public ResponseEntity<List<UsuarioModel>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
+	//MÉTODO GET QUE BUSCA O USUARIO PELO ID
 	@GetMapping("/{id}")
-	public ResponseEntity<UsuarioModel>getById(@PathVariable Long id){
+	public ResponseEntity<UsuarioModel> getById(@PathVariable Long id){
 		return repository.findById(id)
 				.map(resp-> ResponseEntity.ok(resp))
 						.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/{loginUsuario}")
-	public ResponseEntity<UsuarioModel>getByCategoriaAjuda(@PathVariable String loginUsuario){
-		return repository.findByLoginUsuario(loginUsuario)
+	//MÉTODO GET QUE BUSCA O USUARIO PELO LOGIN
+	@GetMapping("/loginUsuario/{loginUsuario}")
+	public ResponseEntity<UsuarioModel> getByfindByLoginUsuario(@PathVariable String loginUsuario){
+		return repository.findByLoginUsuarioContainingIgnoreCase(loginUsuario)
 				.map(resp-> ResponseEntity.ok(resp))
 						.orElse(ResponseEntity.notFound().build());
 	}
 	
+	//MÉTODO POST QUE CRIA UM NOVO USUARIO
 	@PostMapping
-	public ResponseEntity<UsuarioModel>post (@RequestBody UsuarioModel usuario){
+	public ResponseEntity<UsuarioModel> post(@RequestBody UsuarioModel usuario){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
 	}
 	
+	//MÉTODO PUT QUE ATUALIZA AS INFORMAÇÕES DE UM USUARIO
 	@PutMapping
-	public ResponseEntity<UsuarioModel>put (@RequestBody UsuarioModel usuario){
+	public ResponseEntity<UsuarioModel> put(@RequestBody UsuarioModel usuario){
 		return ResponseEntity.ok(repository.save(usuario));
 	}
 	
+	//MÉTODO DELETE QUE APAGA UM USUARIO
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);

@@ -22,38 +22,50 @@ import com.Ampara.LifeMatch.repository.PostagemRepository;
 @RequestMapping ("/postagem")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostagemController {
+	
 	@Autowired
 	private PostagemRepository repository;
 	
+	//MÉTODO GET QUE BUSCA TODAS POSTAGENS
 	@GetMapping
 	public ResponseEntity<List<PostagemModel>>getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
+	//MÉTODO GET QUE BUSCA POSTAGENS PELO ID
 	@GetMapping("/{id}")
-	public ResponseEntity<PostagemModel>getById(@PathVariable Long id){
+	public ResponseEntity<PostagemModel> getById(@PathVariable Long id){
 		return repository.findById(id)
 				.map(resp-> ResponseEntity.ok(resp))
 						.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/{titulo}")
-	public ResponseEntity<PostagemModel>getByCategoriaAjuda(@PathVariable String titulo){
-		return repository.findByTitulo(titulo)
+	//MÉTODO GET QUE BUSCA POSTAGEM PELO TITULO
+	//COM O RESPONSE ENTITY, EM UM TITULO DE POSTAGEM QUE É "BUSCO AUXILIO COM ALIMENTOS"
+	//ELE SÓ PUXA QUANDO EU BUSCO PELA PRIMEIRA PALAVRA DO TITULO
+	//SE EU TENTO BUSCA PELA PALAVRA "AUXILIO" POR EXEMPLO, ELE DA ERRO
+	//JÁ COM O LIST NÃO ACONTECE ISSO, PORÉM TEM A QUESTÃO DE RETORNAR 
+	//NULO E NÃO "OK" OU "NOT FOUND" IGUAL AO RESPONSEENTITY
+	@GetMapping("/titulo/{titulo}")
+	public ResponseEntity<PostagemModel> getByTitulo(@PathVariable String titulo){
+		return repository.findByTituloContainingIgnoreCase(titulo)
 				.map(resp-> ResponseEntity.ok(resp))
 						.orElse(ResponseEntity.notFound().build());
 	}
 	
+	//MÉTODO POST QUE CRIA UMA POSTAGEM NOVA
 	@PostMapping
-	public ResponseEntity<PostagemModel>post (@RequestBody PostagemModel postagem){
+	public ResponseEntity<PostagemModel> post(@RequestBody PostagemModel postagem){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
 	}
 	
+	//MÉTODO PUT QUE ATUALIZA INFORMAÇÕES DE UMA POSTAGEM
 	@PutMapping
-	public ResponseEntity<PostagemModel>put (@RequestBody PostagemModel postagem){
+	public ResponseEntity<PostagemModel> put(@RequestBody PostagemModel postagem){
 		return ResponseEntity.ok(repository.save(postagem));
 	}
 	
+	//MÉTODO DELETE QUE APAGA UMA POSTAGEM BUSCANDO PELO ID
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repository.deleteById(id);

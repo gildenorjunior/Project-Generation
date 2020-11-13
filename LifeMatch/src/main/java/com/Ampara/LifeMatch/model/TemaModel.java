@@ -5,8 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,25 +19,28 @@ import com.sun.istack.NotNull;
 @Table (name = "tb_tema")
 public class TemaModel {
 	
+	//ATRIBUTOS
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long idTema;
-	
 	
 	@Column
     @NotNull
     private String categoriaAjuda ;
 
-	
 	@Column
 	@NotNull
 	@Size (min = 10 ,max = 500)
-	private String decricao;
+	private String descricao;
 
+	
+	//RELACIONAMENTO ENTRA A TABELA POSTAGEM
 	@OneToMany (mappedBy = "tema", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties ("tema")
+	@JsonIgnoreProperties("tema")
 	private  List<PostagemModel> postagem;
 
+	
+	//MÉTODOS GETTERS AND SETTERS 
 	public Long getIdTema() {
 		return idTema;
 	}
@@ -56,12 +57,12 @@ public class TemaModel {
 		this.categoriaAjuda = categoriaAjuda;
 	}
 
-	public String getDecricao() {
-		return decricao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDecricao(String decricao) {
-		this.decricao = decricao;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public List<PostagemModel> getPostagem() {
