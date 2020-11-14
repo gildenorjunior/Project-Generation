@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Ampara.LifeMatch.model.PostagemModel;
 import com.Ampara.LifeMatch.model.UsuarioModel;
 import com.Ampara.LifeMatch.repository.UsuarioRepository;
 

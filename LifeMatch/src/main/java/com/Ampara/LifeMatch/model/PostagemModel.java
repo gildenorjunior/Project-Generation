@@ -62,13 +62,13 @@ public class PostagemModel {
 	@JsonIgnoreProperties("postagem")
 	private TemaModel tema;
 	
-//	//RELACIONAMENTO COM A TABELA USUARIO
-//	@ManyToOne
-//	@JsonIgnoreProperties("postagem")
-//	private UsuarioModel usuario;
+	//RELACIONAMENTO COM A TABELA USUARIO
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private UsuarioModel usuario;
 
 	
-	//MÉTODOS GETTES AND SETTERS
+	//MÉTODOS GETTERS AND SETTERS
 	public Long getIdPostagem() {
 		return idPostagem;
 	}
@@ -133,13 +133,28 @@ public class PostagemModel {
 		this.tema = tema;
 	}
 
-//	public UsuarioModel getUsuario() {
-//		return usuario;
-//	}
-//
-//	public void setUsuario(UsuarioModel usuario) {
-//		this.usuario = usuario;
-//	}
+	public UsuarioModel getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioModel usuario) {
+		this.usuario = usuario;
+	}
+	
+	
+	
+
+	
+	
+
+	
+	
+
+	
+	
+	
+
+	
 
 	
 	

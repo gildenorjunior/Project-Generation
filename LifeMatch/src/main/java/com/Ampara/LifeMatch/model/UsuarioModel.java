@@ -12,8 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
@@ -34,7 +32,6 @@ public class UsuarioModel {
 	@Column
 	@NotNull
 	@Size (min = 8,max = 15)
-	@UniqueElements
 	private String senha;
 	
 	@Column
@@ -55,76 +52,112 @@ public class UsuarioModel {
 	private String loginUsuario;
 	
 	
-	//RELACIONAMENTO ENTRE A TABELA POSTAGEM
-//	@OneToMany //(mappedBy = "postagem", cascade = CascadeType.ALL)
-//	@JsonIgnoreProperties("usuario")
-//	private  List<PostagemModel> postagem;
+//	RELACIONAMENTO ENTRE A TABELA POSTAGEM
+	@OneToMany (mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("usuario")
+	private  List<PostagemModel> postagem;
+
 
 	
+
 	//MÉTODOS GETTERS AND SETTERS
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
 
+
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+
 
 	public String getNomeCompleto() {
 		return nomeCompleto;
 	}
 
+
 	public void setNomeCompleto(String nomeCompleto) {
 		this.nomeCompleto = nomeCompleto;
 	}
+
 
 	public String getSenha() {
 		return senha;
 	}
 
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 
 	public String getCategoriaUsuario() {
 		return categoriaUsuario;
 	}
 
+
 	public void setCategoriaUsuario(String categoriaUsuario) {
 		this.categoriaUsuario = categoriaUsuario;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getImagensUsuario() {
 		return imagensUsuario;
 	}
 
+
 	public void setImagensUsuario(String imagensUsuario) {
 		this.imagensUsuario = imagensUsuario;
 	}
 
-//	public List<PostagemModel> getPostagem() {
-//		return postagem;
-//	}
-//
-//	public void setPostagem(List<PostagemModel> postagem) {
-//		this.postagem = postagem;
-//	}
 
 	public String getLoginUsuario() {
 		return loginUsuario;
 	}
 
+
 	public void setLoginUsuario(String loginUsuario) {
 		this.loginUsuario = loginUsuario;
 	}
+
+
+	public List<PostagemModel> getPostagem() {
+		return postagem;
+	}
+
+
+	public void setPostagem(List<PostagemModel> postagem) {
+		this.postagem = postagem;
+	}
+
+
+	
+
+
+
+	
+
+
+	
+
+
+	
+
+	
+	
+	
+	
+	
 
 	
 }

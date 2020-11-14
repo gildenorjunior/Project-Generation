@@ -10,7 +10,7 @@ import com.Ampara.LifeMatch.model.UsuarioModel;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long> {
 
-	//MÉTODO PARA SER USADO NO CONTROLLER ONDE BUSCA USUARIO POR LOGIN
+
 	Optional<UsuarioModel> findByLoginUsuarioContainingIgnoreCase(String loginUsuario);
 
 }
