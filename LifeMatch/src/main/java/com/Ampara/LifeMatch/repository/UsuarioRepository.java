@@ -12,5 +12,6 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long> {
 
 
 	Optional<UsuarioModel> findByLoginUsuarioContainingIgnoreCase(String loginUsuario);
-
+	public Optional<UsuarioModel> findByLoginUsuarioAndSenha(String loginUsuario, String senha);
+	//public Optional<UsuarioModel> findByLoginUsuario(String loginUsuario);
 }

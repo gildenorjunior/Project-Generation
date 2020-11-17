@@ -26,12 +26,12 @@ public class UsuarioModel {
 	
 	@Column
 	@NotNull
-	@Size (min = 10,max = 50)
+	//@Size (min = 10,max = 50)
 	private String nomeCompleto;
 	
 	@Column
 	@NotNull
-	@Size (min = 8,max = 15)
+	//@Size (min = 8,max = 15)
 	private String senha;
 	
 	@Column
@@ -40,7 +40,7 @@ public class UsuarioModel {
 	
 	@Column
 	@NotNull
-	@Size (min = 9,max = 50)
+	//@Size (min = 9,max = 50)
 	private String email;
 
 	@Column
