@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1aaa282b-ab5f-45ee-9d31-79518673f824",
+		"_postman_id": "b4de20a1-e666-47b2-9d99-81a82d131acb",
 		"name": "COLLECTION_LIFE_MATCH",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -231,59 +231,6 @@
 					"port": "8080",
 					"path": [
 						"tema"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST_USUARIO",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"categoriaUsuario\": \"Doadorasdasdasdsa\",\r\n    \"email\" : \"coisagmailasda\",\r\n    \"imagemUsuario\" : \"linkdaImagem\",\r\n    \"nomeCompleto\" : \"GuiMarcioniloPedroso\",\r\n    \"senha\": \"senhasenha\",\r\n    \"imagensUsuario\" : \"Qualquer imagem\",\r\n    \"loginUsuario\" : \"Guilherme\"\r\n}"
-				},
-				"url": {
-					"raw": "localhost:8080/usuario",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuario"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET_USUARIO",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "localhost:8080/usuario",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuario"
 					]
 				}
 			},

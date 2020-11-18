@@ -1,7 +1,9 @@
 package com.Ampara.LifeMatch.model;
 
 public class UsuarioLogin {
+
 	
+	//ATRIBUTOS
 	private String nome;
 	
 	private String usuario;
@@ -9,8 +11,9 @@ public class UsuarioLogin {
 	private String senha;
 	
 	private String token;
-	
 
+	
+	//MÉTODOS GETTERS AND SETTERS
 	public String getNome() {
 		return nome;
 	}
@@ -21,14 +24,6 @@ public class UsuarioLogin {
 
 	public String getUsuario() {
 		return usuario;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
 	}
 
 	public void setUsuario(String usuario) {
@@ -42,4 +37,16 @@ public class UsuarioLogin {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
+
+	
+	
 }

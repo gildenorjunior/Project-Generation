@@ -21,6 +21,7 @@ import com.Ampara.LifeMatch.model.UsuarioModel;
 import com.Ampara.LifeMatch.repository.UsuarioRepository;
 import com.Ampara.LifeMatch.service.UsuarioService;
 
+
 @RestController
 @RequestMapping ("/usuario")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -28,9 +29,26 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository repository;
-
+	
+	
+	//INJETANDO O USUARIOSERVICE ONDE CONTEM AS REGRAS DE NEGOCIO PARA LOGAR OU CADASTRAR UM USUARIO
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	//END POINT CRIADO PARA O USUÁRIO SE LOGAR
+	//AQUI RECEBEMOS UM OPTIONAL DE USUARIO LOGIN QUE FOI CRIADO ESPECIFICAMENTE PARA FAZER O REQUEST E RESPONSE DO LOGIN
+	@PostMapping("/logar")
+	public ResponseEntity<UsuarioLogin> Autentication(@RequestBody Optional<UsuarioLogin> user){
+		return usuarioService.Logar(user).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	}
+		
+	//END POINT CRIADO PARA QUE POSSA CADASTRAR UM USUÁRIO
+	@PostMapping("/cadastrar")
+	public ResponseEntity<UsuarioModel> Post(@RequestBody UsuarioModel usuario){
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(usuarioService.CadastrarUsuario(usuario));
+	}
 	
 	//MÉTODO GET QUE BUSCA TODOS USUARIOS
 	@GetMapping
@@ -46,25 +64,18 @@ public class UsuarioController {
 						.orElse(ResponseEntity.notFound().build());
 	}
 	
-//	MÉTODO GET QUE BUSCA O USUARIO PELO LOGIN
-	@GetMapping("/loginUsuario/{loginUsuario}")
-	public ResponseEntity<UsuarioModel> getByfindByLoginUsuario(@PathVariable String loginUsuario){
-		return repository.findByLoginUsuarioContainingIgnoreCase(loginUsuario)
+	//MÉTODO GET QUE BUSCA O USUARIO PELO LOGIN
+	@GetMapping("/usuario/{usuario}")
+	public ResponseEntity<UsuarioModel> getByfindByUsuario(@PathVariable String usuario){
+		return repository.findByUsuarioContainingIgnoreCase(usuario)
 				.map(resp-> ResponseEntity.ok(resp))
 						.orElse(ResponseEntity.notFound().build());
 	}
 	
-	//MÉTODO POST QUE LOGA UM USER
-	@PostMapping("/logar")
-	public ResponseEntity<UsuarioLogin> Autentication(@RequestBody Optional<UsuarioLogin> user) {
-		return usuarioService.Logar(user).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-	}
-	
 	//MÉTODO POST QUE CRIA UM NOVO USUARIO
-	@PostMapping("/cadastrar")
-	public ResponseEntity<UsuarioModel> Post(@RequestBody UsuarioModel usuario){
-		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.CadastrarUsuario(usuario));
+	@PostMapping
+	public ResponseEntity<UsuarioModel> post(@RequestBody UsuarioModel usuario){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
 	}
 	
 	//MÉTODO PUT QUE ATUALIZA AS INFORMAÇÕES DE UM USUARIO

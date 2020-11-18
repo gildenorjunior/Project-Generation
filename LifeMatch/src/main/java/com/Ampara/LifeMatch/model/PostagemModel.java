@@ -54,6 +54,7 @@ public class PostagemModel {
 	
 	@Column
 	@NotNull
+	@Size (min = 5 ,max = 9999)
 	private String imagensPostagem;
 	
 	
@@ -62,13 +63,13 @@ public class PostagemModel {
 	@JsonIgnoreProperties("postagem")
 	private TemaModel tema;
 	
-	//RELACIONAMENTO COM A TABELA USUARIO
-	@ManyToOne
-	@JsonIgnoreProperties("postagem")
-	private UsuarioModel usuario;
+//	//RELACIONAMENTO COM A TABELA USUARIO
+//	@ManyToOne
+//	@JsonIgnoreProperties("postagem")
+//	private UsuarioModel usuario;
 
 	
-	//MÉTODOS GETTERS AND SETTERS
+	//MÉTODOS GETTES AND SETTERS
 	public Long getIdPostagem() {
 		return idPostagem;
 	}
@@ -133,28 +134,13 @@ public class PostagemModel {
 		this.tema = tema;
 	}
 
-	public UsuarioModel getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(UsuarioModel usuario) {
-		this.usuario = usuario;
-	}
-	
-	
-	
-
-	
-	
-
-	
-	
-
-	
-	
-	
-
-	
+//	public UsuarioModel getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(UsuarioModel usuario) {
+//		this.usuario = usuario;
+//	}
 
 	
 	
