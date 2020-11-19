@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Ampara.LifeMatch.model.PostagemModel;
 import com.Ampara.LifeMatch.repository.PostagemRepository;
 
+//Controller
 @RestController
 @RequestMapping ("/postagem")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
