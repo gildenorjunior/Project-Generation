@@ -20,9 +20,12 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
-	
 	//MÉTODO PARA CADASTRAR USUARIO
-	public UsuarioModel CadastrarUsuario(UsuarioModel usuario) {
+	public Optional<UsuarioModel> CadastrarUsuario(UsuarioModel usuario) {
+		
+		//CONDIÇÃO PARA NÃO DEIXAR CADASTRAR USUARIOS IGUAIS
+		if(repository.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
+			return null;
 		
 		//INSTANCIANDO UM NOVO OBJETO DO TIPO BCRYPTPASSWORDENCODER E CHAMAMOS ELE DE ENCODER
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -34,7 +37,7 @@ public class UsuarioService {
 		usuario.setSenha(senhaEncoder);
 		
 		//SALVANDO A SENHA ENCRIPTOGRAFADA NO BANCO DE DADOS ATRAVES DO REPOSITORY
-		return repository.save(usuario);
+		return Optional.of(repository.save(usuario));
 	}
 	
 	

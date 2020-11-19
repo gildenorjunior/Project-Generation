@@ -46,8 +46,12 @@ public class UsuarioController {
 	//END POINT CRIADO PARA QUE POSSA CADASTRAR UM USUÁRIO
 	@PostMapping("/cadastrar")
 	public ResponseEntity<UsuarioModel> Post(@RequestBody UsuarioModel usuario){
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(usuarioService.CadastrarUsuario(usuario));
+		Optional<UsuarioModel> user = usuarioService.CadastrarUsuario(usuario);
+			try {
+				return ResponseEntity.ok(user.get());
+			} catch (Exception e) {
+				return ResponseEntity.badRequest().build();
+			}
 	}
 	
 	//MÉTODO GET QUE BUSCA TODOS USUARIOS
